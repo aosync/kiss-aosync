@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 patch -N -p1 < musl.patch
-sed -i 's|/doc/es.1|/es\.1|g' Makefile.in
+sed -i 's|/doc/es\.1|/es\.1|g' Makefile.in
 
 ./configure \
 	--prefix="$1"
