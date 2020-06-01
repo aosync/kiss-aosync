@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-tar xvf ./*iucode-tool*
-cd ./*iucode-tool*/
-
 ./configure \
 	--prefix=/usr
 
