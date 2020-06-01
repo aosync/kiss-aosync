@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-patch -N -p1 < musl.patch
+patch -p1 < musl.patch
 sed -i 's|/doc/es\.1|/es\.1|g' Makefile.in
 
 ./configure \
 	--prefix="$1"
 
 make
-make DESTDIR="$1" install
+make install
