@@ -1,0 +1,8 @@
+#!/bin/sh
+
+touch chrome/test/data/webui/i18n_process_css_test.html
+
+sed -i 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' services/device/public/cpp/usb/BUILD.gn
+
+mkdir -p third_party/node/linux/node-linux-x64/bin
+ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/ 

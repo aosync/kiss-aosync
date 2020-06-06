@@ -1,0 +1,42 @@
+alsa-lib
+bison
+bzip2
+cairo
+cups
+expat
+ffmpeg
+flac
+fontconfig
+freetype-harfbuzz
+mesa
+nss
+pango
+pcre
+perl
+glib
+gtk+3
+pixman
+sqlite
+xcb-util
+zlib
+libcap
+libevent
+libpng
+libX11
+libXau
+libxcb
+libXcursor
+libXdamage
+libXext
+libXfixes
+libXi
+libXinerama
+libXrandr
+curl		make
+flex		make
+gperf		make
+ninja		make
+nodejs		make
+perl		make
+python2		make
+ruby		make
