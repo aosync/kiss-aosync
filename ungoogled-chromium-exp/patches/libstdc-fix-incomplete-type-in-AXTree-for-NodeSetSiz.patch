@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch\chromium\community - aports - Unnamed repository; edit this file 'description' to name the repository.
+</title>
+<meta name='generator' content='cgit v1.2.1'/>
+<meta name='robots' content='index, nofollow'/>
+<link rel='stylesheet' type='text/css' href='/cgit.css'/>
+<link rel='shortcut icon' href='//alpinelinux.org/alpine-logo.ico'/>
+<link rel='alternate' title='Atom feed' href='http://git.alpinelinux.org/aports/atom/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch?h=master' type='application/atom+xml'/>
+<link rel='vcs-git' href='git://git.alpinelinux.org/aports' title='aports Git repository'/>
+<link rel='vcs-git' href='https://git.alpinelinux.org/aports' title='aports Git repository'/>
+</head>
+<body>
+<div id='cgit'><table id='header'>
+<tr>
+<td class='logo' rowspan='2'><a href='/'><img src='//wiki.alpinelinux.org/images/alogo.png' alt='cgit logo'/></a></td>
+<td class='main'><a href='/'>index</a> : <a title='aports' href='/aports/'>aports</a></td><td class='form'><form method='get'>
+<select name='h' onchange='this.form.submit();'>
+<option value='1.10-stable'>1.10-stable</option>
+<option value='1.9'>1.9</option>
+<option value='2.0-stable'>2.0-stable</option>
+<option value='2.1-stable'>2.1-stable</option>
+<option value='2.2-stable'>2.2-stable</option>
+<option value='2.3-stable'>2.3-stable</option>
+<option value='2.4-stable'>2.4-stable</option>
+<option value='2.5-stable'>2.5-stable</option>
+<option value='2.6-stable'>2.6-stable</option>
+<option value='2.7-stable'>2.7-stable</option>
+<option value='3.0-stable'>3.0-stable</option>
+<option value='3.1-stable'>3.1-stable</option>
+<option value='3.10-stable'>3.10-stable</option>
+<option value='3.11-stable'>3.11-stable</option>
+<option value='3.12-stable'>3.12-stable</option>
+<option value='3.2-stable'>3.2-stable</option>
+<option value='3.3-stable'>3.3-stable</option>
+<option value='3.4-stable'>3.4-stable</option>
+<option value='3.5-stable'>3.5-stable</option>
+<option value='3.6-stable'>3.6-stable</option>
+<option value='3.7-stable'>3.7-stable</option>
+<option value='3.8-stable'>3.8-stable</option>
+<option value='3.9-stable'>3.9-stable</option>
+<option value='master' selected='selected'>master</option>
+</select> <input type='submit' value='switch'/></form></td></tr>
+<tr><td class='sub'>Unnamed repository; edit this file 'description' to name the repository.
+</td><td class='sub right'>uwsgi</td></tr></table>
+<table class='tabs'><tr><td>
+<a href='/aports/about/'>about</a><a href='/aports/'>summary</a><a href='/aports/refs/'>refs</a><a href='/aports/log/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>log</a><a class='active' href='/aports/tree/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>tree</a><a href='/aports/commit/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>commit</a><a href='/aports/diff/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>diff</a><a href='/aports/stats/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>stats</a></td><td class='form'><form class='right' method='get' action='/aports/log/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>
+<select name='qt'>
+<option value='grep'>log msg</option>
+<option value='author'>author</option>
+<option value='committer'>committer</option>
+<option value='range'>range</option>
+</select>
+<input class='txt' type='search' size='10' name='q' value=''/>
+<input type='submit' value='search'/>
+</form>
+</td></tr></table>
+<div class='path'>path: <a href='/aports/tree/'>root</a>/<a href='/aports/tree/community'>community</a>/<a href='/aports/tree/community/chromium'>chromium</a>/<a href='/aports/tree/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch</a></div><div class='content'>blob: 7d17ddd20acce8cf9a927563ea4ce9887388e0e5 (<a href='/aports/plain/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>plain</a>) (<a href='/aports/blame/community/chromium/libstdc-fix-incomplete-type-in-AXTree-for-NodeSetSiz.patch'>blame</a>)
+<table summary='blob content' class='blob'>
+<tr><td class='linenumbers'><pre><a id='n1' href='#n1'>1</a>
+<a id='n2' href='#n2'>2</a>
+<a id='n3' href='#n3'>3</a>
+<a id='n4' href='#n4'>4</a>
+<a id='n5' href='#n5'>5</a>
+<a id='n6' href='#n6'>6</a>
+<a id='n7' href='#n7'>7</a>
+<a id='n8' href='#n8'>8</a>
+<a id='n9' href='#n9'>9</a>
+<a id='n10' href='#n10'>10</a>
+<a id='n11' href='#n11'>11</a>
+<a id='n12' href='#n12'>12</a>
+<a id='n13' href='#n13'>13</a>
+<a id='n14' href='#n14'>14</a>
+<a id='n15' href='#n15'>15</a>
+<a id='n16' href='#n16'>16</a>
+<a id='n17' href='#n17'>17</a>
+<a id='n18' href='#n18'>18</a>
+<a id='n19' href='#n19'>19</a>
+<a id='n20' href='#n20'>20</a>
+<a id='n21' href='#n21'>21</a>
+<a id='n22' href='#n22'>22</a>
+<a id='n23' href='#n23'>23</a>
+<a id='n24' href='#n24'>24</a>
+<a id='n25' href='#n25'>25</a>
+<a id='n26' href='#n26'>26</a>
+<a id='n27' href='#n27'>27</a>
+<a id='n28' href='#n28'>28</a>
+<a id='n29' href='#n29'>29</a>
+<a id='n30' href='#n30'>30</a>
+<a id='n31' href='#n31'>31</a>
+<a id='n32' href='#n32'>32</a>
+<a id='n33' href='#n33'>33</a>
+<a id='n34' href='#n34'>34</a>
+<a id='n35' href='#n35'>35</a>
+<a id='n36' href='#n36'>36</a>
+<a id='n37' href='#n37'>37</a>
+<a id='n38' href='#n38'>38</a>
+<a id='n39' href='#n39'>39</a>
+<a id='n40' href='#n40'>40</a>
+<a id='n41' href='#n41'>41</a>
+<a id='n42' href='#n42'>42</a>
+<a id='n43' href='#n43'>43</a>
+<a id='n44' href='#n44'>44</a>
+<a id='n45' href='#n45'>45</a>
+<a id='n46' href='#n46'>46</a>
+<a id='n47' href='#n47'>47</a>
+<a id='n48' href='#n48'>48</a>
+<a id='n49' href='#n49'>49</a>
+<a id='n50' href='#n50'>50</a>
+<a id='n51' href='#n51'>51</a>
+<a id='n52' href='#n52'>52</a>
+<a id='n53' href='#n53'>53</a>
+<a id='n54' href='#n54'>54</a>
+<a id='n55' href='#n55'>55</a>
+<a id='n56' href='#n56'>56</a>
+<a id='n57' href='#n57'>57</a>
+<a id='n58' href='#n58'>58</a>
+<a id='n59' href='#n59'>59</a>
+<a id='n60' href='#n60'>60</a>
+<a id='n61' href='#n61'>61</a>
+<a id='n62' href='#n62'>62</a>
+<a id='n63' href='#n63'>63</a>
+</pre></td>
+<td class='lines'><pre><code>Upstream: Yes
+From aeef68888d4c00b69facead2b934095a8cd17329 Mon Sep 17 00:00:00 2001
+From: Stephan Hartmann &lt;stha09&#64;googlemail.com&gt;
+Date: Mon, 20 Apr 2020 18:21:43 +0000
+Subject: [PATCH] libstdc++: fix incomplete-type in AXTree for
+ NodeSetSizePosInSetInfo
+
+has only forward declaration of NodeSetSizePosInSetInfo. Therefore,
+move declaration from ax_tree.cc.
+
+std: :unordered_map&lt;T, U&gt; requires U to be fully declared. ax_tree.h
+Bug: 957519
+Change-Id: Ic1f4bf3ebfea229ece84251e46d4461b31873868
+Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/2132403
+Reviewed-by: David Tseng &lt;dtseng&#64;chromium.org&gt;
+Commit-Queue: David Tseng &lt;dtseng&#64;chromium.org&gt;
+Cr-Commit-Position: refs/heads/master&#64;{#760588}
+<span style="color:#000000; font-weight:bold">---</span>
+ ui/accessibility/ax_tree.cc | 10 ++--------
+ ui/accessibility/ax_tree.h  |  9 ++++++++-
+ 2 files changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/ui/accessibility/ax_tree.cc b/ui/accessibility/ax_tree.cc
+index 7b8d9b1b161..e9154028d66 100644
+<span style="color:#000000; font-weight:bold">--- ui/accessibility/ax_tree.cc</span>
+<span style="color:#0057ae">+++ ui/accessibility/ax_tree.cc</span>
+&#64;&#64; -567,14 +567,8 &#64;&#64; struct AXTreeUpdateState {
+   const AXTree&amp; tree;
+ };
+
+<span style="color:#000000; font-weight:bold">-struct AXTree::NodeSetSizePosInSetInfo {</span>
+<span style="color:#000000; font-weight:bold">-  NodeSetSizePosInSetInfo() = default;</span>
+<span style="color:#000000; font-weight:bold">-  ~NodeSetSizePosInSetInfo() = default;</span>
+<span style="color:#000000; font-weight:bold">-</span>
+<span style="color:#000000; font-weight:bold">-  int32_t pos_in_set = 0;</span>
+<span style="color:#000000; font-weight:bold">-  int32_t set_size = 0;</span>
+<span style="color:#000000; font-weight:bold">-  base::Optional&lt;int&gt; lowest_hierarchical_level;</span>
+<span style="color:#000000; font-weight:bold">-};</span>
+<span style="color:#0057ae">+AXTree::NodeSetSizePosInSetInfo::NodeSetSizePosInSetInfo() = default;</span>
+<span style="color:#0057ae">+AXTree::NodeSetSizePosInSetInfo::~NodeSetSizePosInSetInfo() = default;</span>
+
+ struct AXTree::OrderedSetContent {
+   explicit OrderedSetContent(const AXNode* ordered_set = nullptr)
+diff --git a/ui/accessibility/ax_tree.h b/ui/accessibility/ax_tree.h
+index a51ca8de4c8..8c1c57517ac 100644
+<span style="color:#000000; font-weight:bold">--- ui/accessibility/ax_tree.h</span>
+<span style="color:#0057ae">+++ ui/accessibility/ax_tree.h</span>
+&#64;&#64; -328,7 +328,14 &#64;&#64; class AX_EXPORT AXTree : public AXNode::OwnerTree {
+   bool enable_extra_mac_nodes_ = false;
+
+   // Contains pos_in_set and set_size data for an AXNode.
+<span style="color:#000000; font-weight:bold">-  struct NodeSetSizePosInSetInfo;</span>
+<span style="color:#0057ae">+  struct NodeSetSizePosInSetInfo {</span>
+<span style="color:#0057ae">+    NodeSetSizePosInSetInfo();</span>
+<span style="color:#0057ae">+    ~NodeSetSizePosInSetInfo();</span>
+<span style="color:#0057ae">+</span>
+<span style="color:#0057ae">+    int32_t pos_in_set = 0;</span>
+<span style="color:#0057ae">+    int32_t set_size = 0;</span>
+<span style="color:#0057ae">+    base::Optional&lt;int&gt; lowest_hierarchical_level;</span>
+<span style="color:#0057ae">+  };</span>
+
+   // Represents the content of an ordered set which includes the ordered set
+   // items and the ordered set container if it exists.
+</code></pre></td></tr></table>
+</div> <!-- class=content -->
+<div class='footer'>generated by <a href='https://git.zx2c4.com/cgit/about/'>cgit v1.2.1</a> (<a href='https://git-scm.com/'>git 2.18.0</a>) at 2020-06-06 19:55:02 +0000</div>
+</div> <!-- id=cgit -->
+</body>
+</html>

@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+sh>/dev/tty
+
+meson \
+    --prefix="$1/usr" \
+    --sysconfdir="$1/etc" ..
+
+ninja
+ninja install

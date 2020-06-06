@@ -1,8 +1,115 @@
 #!/bin/sh
 
-touch chrome/test/data/webui/i18n_process_css_test.html
+for patch in ./*.patch; do
+    patch -p1 < "$patch"
+done
 
-sed -i 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' services/device/public/cpp/usb/BUILD.gn
+touch ./chrome/test/data/webui/i18n_process_css_test.html
+sed -i 's|//third_party/usb_ids/usb.ids|/usr/share/hwdata/usb.ids|g' ./services/device/public/cpp/usb/BUILD.gn
 
-mkdir -p third_party/node/linux/node-linux-x64/bin
-ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/ 
+# No need for ATK
+sed -i 's|use_atk*=*|use_atk = false|g' ./build/config/ui.gni
+
+mkdir -p ./third_party/node/linux/node-linux-x64/bin
+ln -s /usr/bin/node ./third_party/node/linux/node-linux-x64/bin/
+
+use_system="ffmpeg flac fontconfig freetype harfbuzz-ng libevent libpng libjpeg opus"
+
+for lib in $use_system libjpeg_turbo; do
+    find -type f -path "*third_party/$lib/*" \
+			\! -path "*third_party/$lib/chromium/*" \
+			\! -path "*third_party/$lib/google/*" \
+			\! -path './base/third_party/icu/*' \
+			\! -path './third_party/libxml/*' \
+			\! -path './third_party/pdfium/third_party/freetype/include/pstables.h' \
+			\! -path './third_party/harfbuzz-ng/utils/hb_scoped.h' \
+			\! -path './third_party/yasm/run_yasm.py' \
+			\! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+			-delete
+done
+
+sh>/dev/tty
+
+python2 build/linux/unbundle/replace_gn_files.py --system-libraries $use_system
+./third_party/libaddressinput/chromium/tools/update-strings.py
+
+flatn() {
+    echo $*
+}
+
+_c=$(flatn \
+    is_clang=true \
+    use_gnome_keyring=false \
+    use_dbus=false \
+    use_pulseaudio=false \
+    link_pulseaudio=false \
+    use_atk=false \
+    use_sysroot=false \
+    treat_warnings_as_errors=false \
+    fatal_linker_warnings=false \
+    binutils_path=\"/usr/bin\" \
+    use_custom_libcxx=false \
+    use_gold=false use_allocator=\"none\" \
+    use_allocator_shim=false use_vaapi=true \
+)
+
+python2 ./tools/gn/bootstrap/bootstrap.py -s -v --gn-gen-args "$_c"
+
+_c=$(flatn blink_symbol_level=0 \
+    is_clang=true \
+    closure_compile=true \
+    custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+    enable_hangout_services_extension=true \
+    enable_nacl_nonsfi=false \
+    enable_nacl=false \
+    enable_precompiled_headers=false \
+    fatal_linker_warnings=false \
+    ffmpeg_branding=\"Chrome\" \
+    fieldtrial_testing_like_official_build=true \
+    gold_path=\"/usr/bin/ld.gold\" \
+    host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+    icu_use_data_file=true \
+    is_component_build=false \
+    is_debug=false \
+    is_desktop_linux=true \
+    linux_use_bundled_binutils=false \
+    proprietary_codecs=true \
+    symbol_level=0 \
+    treat_warnings_as_errors=false \
+    use_allocator_shim=false \
+    use_allocator=\"none\" \
+    use_cups=true \
+    use_custom_libcxx=false \
+    use_gnome_keyring=false \
+    use_gold=false \
+    use_lld=false \
+    use_pulseaudio=false \
+    link_pulseaudio=false \
+    use_dbus=false \
+    use_atk=false \
+    use_sysroot=false \
+    use_system_harfbuzz=true \
+)
+
+export _c
+
+sh>/dev/tty
+
+export AR="ar"
+export CC="clang"
+export CXX="clang++"
+export NM="/usr/bin/nm"
+./out/Release/gn gen out/Release --args="$_c"
+
+ninja -C ./out/Release mksnapshot
+ninja -C ./out/Release v8_context_snapshot_generator
+
+ninja -C ./out/Release chrome chrome_sandbox chromedriver
+
+# cd ./out/Release
+
+# for bin in ./chrome ./chromedriver ./*.bin; do
+#    install -Dm755 $bin /usr/lib/chromium/bin
+# done
+
+# install -Dm755 ./swiftshader/libEGL.so /usr/lib/chromium/swiftshader

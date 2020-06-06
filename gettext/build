@@ -1,0 +1,7 @@
+#!/bin/sh
+
+./configure \
+    --prefix="$1/usr"
+
+make
+make install

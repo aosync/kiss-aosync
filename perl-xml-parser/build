@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PERL_MM_USE_DEFAULT=1
+
+perl -MCPAN -e 'install XML::Parser'

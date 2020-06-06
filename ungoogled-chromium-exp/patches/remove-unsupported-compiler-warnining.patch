@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>remove-unsupported-compiler-warnining.patch\chromium\community - aports - Unnamed repository; edit this file 'description' to name the repository.
+</title>
+<meta name='generator' content='cgit v1.2.1'/>
+<meta name='robots' content='index, nofollow'/>
+<link rel='stylesheet' type='text/css' href='/cgit.css'/>
+<link rel='shortcut icon' href='//alpinelinux.org/alpine-logo.ico'/>
+<link rel='alternate' title='Atom feed' href='http://git.alpinelinux.org/aports/atom/community/chromium/remove-unsupported-compiler-warnining.patch?h=master' type='application/atom+xml'/>
+<link rel='vcs-git' href='git://git.alpinelinux.org/aports' title='aports Git repository'/>
+<link rel='vcs-git' href='https://git.alpinelinux.org/aports' title='aports Git repository'/>
+</head>
+<body>
+<div id='cgit'><table id='header'>
+<tr>
+<td class='logo' rowspan='2'><a href='/'><img src='//wiki.alpinelinux.org/images/alogo.png' alt='cgit logo'/></a></td>
+<td class='main'><a href='/'>index</a> : <a title='aports' href='/aports/'>aports</a></td><td class='form'><form method='get'>
+<select name='h' onchange='this.form.submit();'>
+<option value='1.10-stable'>1.10-stable</option>
+<option value='1.9'>1.9</option>
+<option value='2.0-stable'>2.0-stable</option>
+<option value='2.1-stable'>2.1-stable</option>
+<option value='2.2-stable'>2.2-stable</option>
+<option value='2.3-stable'>2.3-stable</option>
+<option value='2.4-stable'>2.4-stable</option>
+<option value='2.5-stable'>2.5-stable</option>
+<option value='2.6-stable'>2.6-stable</option>
+<option value='2.7-stable'>2.7-stable</option>
+<option value='3.0-stable'>3.0-stable</option>
+<option value='3.1-stable'>3.1-stable</option>
+<option value='3.10-stable'>3.10-stable</option>
+<option value='3.11-stable'>3.11-stable</option>
+<option value='3.12-stable'>3.12-stable</option>
+<option value='3.2-stable'>3.2-stable</option>
+<option value='3.3-stable'>3.3-stable</option>
+<option value='3.4-stable'>3.4-stable</option>
+<option value='3.5-stable'>3.5-stable</option>
+<option value='3.6-stable'>3.6-stable</option>
+<option value='3.7-stable'>3.7-stable</option>
+<option value='3.8-stable'>3.8-stable</option>
+<option value='3.9-stable'>3.9-stable</option>
+<option value='master' selected='selected'>master</option>
+</select> <input type='submit' value='switch'/></form></td></tr>
+<tr><td class='sub'>Unnamed repository; edit this file 'description' to name the repository.
+</td><td class='sub right'>uwsgi</td></tr></table>
+<table class='tabs'><tr><td>
+<a href='/aports/about/'>about</a><a href='/aports/'>summary</a><a href='/aports/refs/'>refs</a><a href='/aports/log/community/chromium/remove-unsupported-compiler-warnining.patch'>log</a><a class='active' href='/aports/tree/community/chromium/remove-unsupported-compiler-warnining.patch'>tree</a><a href='/aports/commit/community/chromium/remove-unsupported-compiler-warnining.patch'>commit</a><a href='/aports/diff/community/chromium/remove-unsupported-compiler-warnining.patch'>diff</a><a href='/aports/stats/community/chromium/remove-unsupported-compiler-warnining.patch'>stats</a></td><td class='form'><form class='right' method='get' action='/aports/log/community/chromium/remove-unsupported-compiler-warnining.patch'>
+<select name='qt'>
+<option value='grep'>log msg</option>
+<option value='author'>author</option>
+<option value='committer'>committer</option>
+<option value='range'>range</option>
+</select>
+<input class='txt' type='search' size='10' name='q' value=''/>
+<input type='submit' value='search'/>
+</form>
+</td></tr></table>
+<div class='path'>path: <a href='/aports/tree/'>root</a>/<a href='/aports/tree/community'>community</a>/<a href='/aports/tree/community/chromium'>chromium</a>/<a href='/aports/tree/community/chromium/remove-unsupported-compiler-warnining.patch'>remove-unsupported-compiler-warnining.patch</a></div><div class='content'>blob: f329cfcec2629428388c4e2e3a3ec2bd807ef23d (<a href='/aports/plain/community/chromium/remove-unsupported-compiler-warnining.patch'>plain</a>) (<a href='/aports/blame/community/chromium/remove-unsupported-compiler-warnining.patch'>blame</a>)
+<table summary='blob content' class='blob'>
+<tr><td class='linenumbers'><pre><a id='n1' href='#n1'>1</a>
+<a id='n2' href='#n2'>2</a>
+<a id='n3' href='#n3'>3</a>
+<a id='n4' href='#n4'>4</a>
+<a id='n5' href='#n5'>5</a>
+<a id='n6' href='#n6'>6</a>
+<a id='n7' href='#n7'>7</a>
+<a id='n8' href='#n8'>8</a>
+<a id='n9' href='#n9'>9</a>
+<a id='n10' href='#n10'>10</a>
+<a id='n11' href='#n11'>11</a>
+<a id='n12' href='#n12'>12</a>
+<a id='n13' href='#n13'>13</a>
+</pre></td>
+<td class='lines'><pre><code>GCC doesn&#39;t know this option
+<span style="color:#000000; font-weight:bold">--- build/config/compiler/BUILD.gn.orig	2020-05-20 09:34:53.358598296 -0400</span>
+<span style="color:#0057ae">+++ build/config/compiler/BUILD.gn	2020-05-20 09:35:40.589648947 -0400</span>
+<span style="color:#010181">&#64;&#64; -1508,9 +1508,6 &#64;&#64;</span>
+           # TODO(https://crbug.com/1028110): Evaluate and possible enable.
+           &quot;-Wno-deprecated-copy&quot;,
+ 
+<span style="color:#000000; font-weight:bold">-          # TODO(https://crbug.com/1050281): Clean up, enable.</span>
+<span style="color:#000000; font-weight:bold">-          &quot;-Wno-non-c-typedef-for-linkage&quot;,</span>
+<span style="color:#000000; font-weight:bold">-</span>
+           # TODO(https://crbug.com/1059231): Clean up, enable.
+           &quot;-Wno-pointer-to-int-cast&quot;,
+         ]
+</code></pre></td></tr></table>
+</div> <!-- class=content -->
+<div class='footer'>generated by <a href='https://git.zx2c4.com/cgit/about/'>cgit v1.2.1</a> (<a href='https://git-scm.com/'>git 2.18.0</a>) at 2020-06-06 19:57:26 +0000</div>
+</div> <!-- id=cgit -->
+</body>
+</html>

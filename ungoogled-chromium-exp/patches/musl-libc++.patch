@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>musl-libc++.patch\chromium\community - aports - Unnamed repository; edit this file 'description' to name the repository.
+</title>
+<meta name='generator' content='cgit v1.2.1'/>
+<meta name='robots' content='index, nofollow'/>
+<link rel='stylesheet' type='text/css' href='/cgit.css'/>
+<link rel='shortcut icon' href='//alpinelinux.org/alpine-logo.ico'/>
+<link rel='alternate' title='Atom feed' href='http://git.alpinelinux.org/aports/atom/community/chromium/musl-libc++.patch?h=master' type='application/atom+xml'/>
+<link rel='vcs-git' href='git://git.alpinelinux.org/aports' title='aports Git repository'/>
+<link rel='vcs-git' href='https://git.alpinelinux.org/aports' title='aports Git repository'/>
+</head>
+<body>
+<div id='cgit'><table id='header'>
+<tr>
+<td class='logo' rowspan='2'><a href='/'><img src='//wiki.alpinelinux.org/images/alogo.png' alt='cgit logo'/></a></td>
+<td class='main'><a href='/'>index</a> : <a title='aports' href='/aports/'>aports</a></td><td class='form'><form method='get'>
+<select name='h' onchange='this.form.submit();'>
+<option value='1.10-stable'>1.10-stable</option>
+<option value='1.9'>1.9</option>
+<option value='2.0-stable'>2.0-stable</option>
+<option value='2.1-stable'>2.1-stable</option>
+<option value='2.2-stable'>2.2-stable</option>
+<option value='2.3-stable'>2.3-stable</option>
+<option value='2.4-stable'>2.4-stable</option>
+<option value='2.5-stable'>2.5-stable</option>
+<option value='2.6-stable'>2.6-stable</option>
+<option value='2.7-stable'>2.7-stable</option>
+<option value='3.0-stable'>3.0-stable</option>
+<option value='3.1-stable'>3.1-stable</option>
+<option value='3.10-stable'>3.10-stable</option>
+<option value='3.11-stable'>3.11-stable</option>
+<option value='3.12-stable'>3.12-stable</option>
+<option value='3.2-stable'>3.2-stable</option>
+<option value='3.3-stable'>3.3-stable</option>
+<option value='3.4-stable'>3.4-stable</option>
+<option value='3.5-stable'>3.5-stable</option>
+<option value='3.6-stable'>3.6-stable</option>
+<option value='3.7-stable'>3.7-stable</option>
+<option value='3.8-stable'>3.8-stable</option>
+<option value='3.9-stable'>3.9-stable</option>
+<option value='master' selected='selected'>master</option>
+</select> <input type='submit' value='switch'/></form></td></tr>
+<tr><td class='sub'>Unnamed repository; edit this file 'description' to name the repository.
+</td><td class='sub right'>uwsgi</td></tr></table>
+<table class='tabs'><tr><td>
+<a href='/aports/about/'>about</a><a href='/aports/'>summary</a><a href='/aports/refs/'>refs</a><a href='/aports/log/community/chromium/musl-libc++.patch'>log</a><a class='active' href='/aports/tree/community/chromium/musl-libc++.patch'>tree</a><a href='/aports/commit/community/chromium/musl-libc++.patch'>commit</a><a href='/aports/diff/community/chromium/musl-libc++.patch'>diff</a><a href='/aports/stats/community/chromium/musl-libc++.patch'>stats</a></td><td class='form'><form class='right' method='get' action='/aports/log/community/chromium/musl-libc++.patch'>
+<select name='qt'>
+<option value='grep'>log msg</option>
+<option value='author'>author</option>
+<option value='committer'>committer</option>
+<option value='range'>range</option>
+</select>
+<input class='txt' type='search' size='10' name='q' value=''/>
+<input type='submit' value='search'/>
+</form>
+</td></tr></table>
+<div class='path'>path: <a href='/aports/tree/'>root</a>/<a href='/aports/tree/community'>community</a>/<a href='/aports/tree/community/chromium'>chromium</a>/<a href='/aports/tree/community/chromium/musl-libc++.patch'>musl-libc++.patch</a></div><div class='content'>blob: 1e26f65b6939e436b02f34fce3dadb4491c2ad21 (<a href='/aports/plain/community/chromium/musl-libc++.patch'>plain</a>) (<a href='/aports/blame/community/chromium/musl-libc++.patch'>blame</a>)
+<table summary='blob content' class='blob'>
+<tr><td class='linenumbers'><pre><a id='n1' href='#n1'>1</a>
+<a id='n2' href='#n2'>2</a>
+<a id='n3' href='#n3'>3</a>
+<a id='n4' href='#n4'>4</a>
+<a id='n5' href='#n5'>5</a>
+<a id='n6' href='#n6'>6</a>
+<a id='n7' href='#n7'>7</a>
+<a id='n8' href='#n8'>8</a>
+<a id='n9' href='#n9'>9</a>
+<a id='n10' href='#n10'>10</a>
+<a id='n11' href='#n11'>11</a>
+<a id='n12' href='#n12'>12</a>
+<a id='n13' href='#n13'>13</a>
+<a id='n14' href='#n14'>14</a>
+<a id='n15' href='#n15'>15</a>
+<a id='n16' href='#n16'>16</a>
+<a id='n17' href='#n17'>17</a>
+<a id='n18' href='#n18'>18</a>
+<a id='n19' href='#n19'>19</a>
+<a id='n20' href='#n20'>20</a>
+<a id='n21' href='#n21'>21</a>
+<a id='n22' href='#n22'>22</a>
+<a id='n23' href='#n23'>23</a>
+<a id='n24' href='#n24'>24</a>
+<a id='n25' href='#n25'>25</a>
+<a id='n26' href='#n26'>26</a>
+<a id='n27' href='#n27'>27</a>
+<a id='n28' href='#n28'>28</a>
+<a id='n29' href='#n29'>29</a>
+<a id='n30' href='#n30'>30</a>
+<a id='n31' href='#n31'>31</a>
+<a id='n32' href='#n32'>32</a>
+<a id='n33' href='#n33'>33</a>
+<a id='n34' href='#n34'>34</a>
+<a id='n35' href='#n35'>35</a>
+<a id='n36' href='#n36'>36</a>
+<a id='n37' href='#n37'>37</a>
+<a id='n38' href='#n38'>38</a>
+<a id='n39' href='#n39'>39</a>
+<a id='n40' href='#n40'>40</a>
+<a id='n41' href='#n41'>41</a>
+<a id='n42' href='#n42'>42</a>
+<a id='n43' href='#n43'>43</a>
+<a id='n44' href='#n44'>44</a>
+<a id='n45' href='#n45'>45</a>
+<a id='n46' href='#n46'>46</a>
+<a id='n47' href='#n47'>47</a>
+<a id='n48' href='#n48'>48</a>
+<a id='n49' href='#n49'>49</a>
+<a id='n50' href='#n50'>50</a>
+<a id='n51' href='#n51'>51</a>
+</pre></td>
+<td class='lines'><pre><code><span style="color:#000000; font-weight:bold">--- buildtools/third_party/libc++/trunk/include/locale</span>
+<span style="color:#0057ae">+++ buildtools/third_party/libc++/trunk/include/locale</span>
+<span style="color:#010181">&#64;&#64; -10,6 +10,15 &#64;&#64;</span>
+ #ifndef _LIBCPP_LOCALE
+ #define _LIBCPP_LOCALE
+ 
+<span style="color:#0057ae">+// musl doesn&#39;t define _l (with locale) variants of functions, as it only supports UTF-8.</span>
+<span style="color:#0057ae">+// we can simply make macros that will call the non-localated ones if we&#39;re using musl, or rather not-using something that has the _l ones.</span>
+<span style="color:#0057ae">+// couldn&#39;t find anything glibc #defines when it creates strtoull_l (that it doesn&#39;t undefine a few lines later), so let&#39;s test against glibc and glibc-likes.</span>
+<span style="color:#0057ae">+// almost all glibc-likes define __GNU_LIBRARY__ for compatibility</span>
+<span style="color:#0057ae">+#ifndef __GNU_LIBRARY__</span>
+<span style="color:#0057ae">+#define strtoull_l(A, B, C, LOC) strtoull(A,B,C)</span>
+<span style="color:#0057ae">+#define strtoll_l(A, B, C, LOC) strtoll(A,B,C)</span>
+<span style="color:#0057ae">+#endif</span>
+<span style="color:#0057ae">+</span>
+ /*
+     locale synopsis
+ 
+<span style="color:#000000; font-weight:bold">--- buildtools/third_party/libc++/trunk/src/locale.cpp</span>
+<span style="color:#0057ae">+++ buildtools/third_party/libc++/trunk/src/locale.cpp</span>
+<span style="color:#010181">&#64;&#64; -1019,11 +1019,11 &#64;&#64;</span>
+     return low;
+ }
+ 
+<span style="color:#000000; font-weight:bold">-#if defined(__EMSCRIPTEN__)</span>
+<span style="color:#0057ae">+// #if defined(__EMSCRIPTEN__)</span>
+ extern &quot;C&quot; const unsigned short ** __ctype_b_loc();
+ extern &quot;C&quot; const int ** __ctype_tolower_loc();
+ extern &quot;C&quot; const int ** __ctype_toupper_loc();
+<span style="color:#000000; font-weight:bold">-#endif</span>
+<span style="color:#0057ae">+// #endif</span>
+ 
+ #ifdef _LIBCPP_PROVIDES_DEFAULT_RUNE_TABLE
+ const ctype&lt;char&gt;::mask*
+<span style="color:#010181">&#64;&#64; -1127,12 +1127,10 &#64;&#64;</span>
+ #elif defined(_AIX)
+     return (const unsigned int *)__lc_ctype_ptr-&gt;obj-&gt;mask;
+ #else
+<span style="color:#000000; font-weight:bold">-    // Platform not supported: abort so the person doing the port knows what to</span>
+<span style="color:#000000; font-weight:bold">-    // fix</span>
+<span style="color:#000000; font-weight:bold">-# warning  ctype&lt;char&gt;::classic_table() is not implemented</span>
+<span style="color:#000000; font-weight:bold">-    printf(&quot;ctype&lt;char&gt;::classic_table() is not implemented\n&quot;);</span>
+<span style="color:#000000; font-weight:bold">-    abort();</span>
+<span style="color:#000000; font-weight:bold">-    return NULL;</span>
+<span style="color:#0057ae">+// not sure any other libc like this exists, but there is no way to differentiate musl as of right now</span>
+<span style="color:#0057ae">+// to be fair, with the change above, this should always work</span>
+<span style="color:#0057ae">+// also, #warning is a gcc extension</span>
+<span style="color:#0057ae">+    return (const unsigned long *)*__ctype_b_loc();</span>
+ #endif
+ }
+ #endif
+</code></pre></td></tr></table>
+</div> <!-- class=content -->
+<div class='footer'>generated by <a href='https://git.zx2c4.com/cgit/about/'>cgit v1.2.1</a> (<a href='https://git-scm.com/'>git 2.18.0</a>) at 2020-06-06 19:56:21 +0000</div>
+</div> <!-- id=cgit -->
+</body>
+</html>

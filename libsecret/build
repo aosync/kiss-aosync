@@ -1,0 +1,8 @@
+#!/bin/sh
+
+./configure \
+    --prefix="$1/usr" \
+    --disable-manpages
+
+make
+make install

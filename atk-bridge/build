@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+sh > /dev/tty
+
+meson --prefix="$1/usr" ..
+
+ninja
+ninja install
