@@ -12,6 +12,8 @@ mesa
 nss
 pango
 pcre
+pciutils
+re2
 perl
 glib
 gtk+3
@@ -21,6 +23,7 @@ sqlite
 xcb-util
 zlib
 libcap
+libdrm
 libevent
 libjpeg-turbo
 libpng
@@ -29,6 +32,7 @@ libva
 libX11
 libXau
 libxcb
+libXScrnSaver
 libXcursor
 libXdamage
 libXext
@@ -37,12 +41,14 @@ libXi
 libXinerama
 libxml2
 libXrandr
+libXslt
+libXtst
 clang		make
 curl		make
 flex		make
 gperf		make
 samurai		make
 nodejs		make
-perl		make
 python2		make
 ruby		make
+yasm		make
