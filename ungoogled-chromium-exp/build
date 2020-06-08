@@ -51,6 +51,7 @@ done
 # Clang is the officially supported compiler and builds chromium faster.
 export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm LD=clang++
 export PATH=$PWD/fix-python-bin:$PATH
+export LD_LIBRARY_PATH="$PWD/fix-libssl:$LD_LIBRARY_PATH"
 
 # Make a temporary script to cause 'python' to resolve to python 2 and not 3.
 mkdir -p fix-python-bin
@@ -59,6 +60,14 @@ cat << EOF > ./fix-python-bin/python
 exec python2 "\$@"
 EOF
 chmod +x ./fix-python-bin/python
+
+mkdir -p fix-libssl
+ln -sf /usr/lib/libssl.so ./fix-libssl/libssl.so.47
+ln -sf /usr/lib/libcrypto.so ./fix-libssl/libcrypto.so.45
+
+echo "Testing python libssl"
+python2 -c 'import hashlib' || exit 1
+echo "Python succeded"
 
 # Use system nodejs.
 mkdir -p third_party/node/linux/node-linux-x64/bin
