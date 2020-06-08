@@ -26,6 +26,7 @@ libcap
 libdrm
 libevent
 libjpeg-turbo
+libkrb5
 libpng
 libsecret
 libva
