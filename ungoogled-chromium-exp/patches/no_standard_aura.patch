@@ -1,0 +1,13 @@
+--- a/chrome/browser/ui/BUILD.gn	2020-05-18 20:40:21.000000000 +0200
++++ b/chrome/browser/ui/BUILD.gn	2020-06-09 20:42:51.079530190 +0200
+@@ -3685,8 +3671,8 @@
+     if (!is_chromeos) {
+       sources += [
+         "views/frame/browser_non_client_frame_view_factory_views.cc",
+-        "views/frame/desktop_browser_frame_aura.cc",
+-        "views/frame/desktop_browser_frame_aura.h",
++       #"views/frame/desktop_browser_frame_aura.cc",
++       #"views/frame/desktop_browser_frame_aura.h",
+       ]
+     }
+ 

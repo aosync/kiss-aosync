@@ -35,9 +35,9 @@ set -- \
     use_allocator_shim=false \
     use_cups=false \
     use_custom_libcxx=false \
-    use_dbus=false \
     use_gnome_keyring=false \
     use_official_google_api_keys=false \
+    use_dbus=false \
     use_pulseaudio=false \
     link_pulseaudio=false \
     use_sysroot=false \
@@ -93,6 +93,11 @@ python2 build/linux/unbundle/replace_gn_files.py \
                        snappy yasm
 
 python2 tools/gn/bootstrap/bootstrap.py -s -v --gn-gen-args "$*"
+
+ninja -C out/Release protoc
+
+# Generate the protos because they are missing
+./out/Release/protoc ./components/safe_browsing/core/proto/*.proto --cpp_out=./
 
 # All shells seem to support this despite the lack of a POSIX spec for it.
 # shellcheck disable=2039

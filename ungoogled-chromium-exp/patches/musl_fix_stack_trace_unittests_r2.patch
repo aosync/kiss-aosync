@@ -1,0 +1,20 @@
+--- a/base/debug/stack_trace_unittest.cc	2020-05-18 20:39:03.000000000 +0200
++++ b/base/debug/stack_trace_unittest.cc	2020-06-08 20:30:10.044358269 +0200
+@@ -31,7 +31,7 @@
+ typedef testing::Test StackTraceTest;
+ #endif
+ 
+-#if !defined(__UCLIBC__) && !defined(_AIX)
++#if defined(__GLIBC__) !defined(__UCLIBC__) && !defined(_AIX)
+ // StackTrace::OutputToStream() is not implemented under uclibc, nor AIX.
+ // See https://crbug.com/706728
+ 
+@@ -167,7 +167,7 @@
+   trace.ToStringWithPrefix(nullptr);
+ }
+ 
+-#endif  // !defined(__UCLIBC__) && !defined(_AIX)
++#endif  // defined(__GLIBC__) && !defined(__UCLIBC__) && !defined(_AIX)
+ 
+ #if defined(OS_POSIX) && !defined(OS_ANDROID)
+ #if !defined(OS_IOS)

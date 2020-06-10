@@ -1,3 +1,31 @@
+--- a/chrome/browser/ui/BUILD.gn
++++ b/chrome/browser/ui/BUILD.gn
+@@ -2644,7 +2644,7 @@
+       "//ui/events:dom_keycode_converter",
+     ]
+ 
+-    if (use_dbus) {
++    if (false) {
+       sources += [
+         "views/status_icons/concat_menu_model.cc",
+         "views/status_icons/concat_menu_model.h",
+@@ -2672,7 +2672,6 @@
+       ]
+       configs += [ "//build/config/linux:x11" ]
+       deps += [
+-        "//components/dbus/menu",
+         "//ui/events/devices",
+         "//ui/events/devices/x11",
+         "//ui/events/platform/x11",
+@@ -4238,7 +4237,7 @@
+     ]
+   }
+ 
+-  if (use_dbus) {
++  if (false) {
+     deps += [ "//dbus" ]
+   }
+ 
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
 @@ -4187,9 +4187,6 @@
