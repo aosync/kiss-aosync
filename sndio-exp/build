@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+./configure --prefix="$1/usr"
+make
+mkdir "$1/var/run/sndiod"
+useradd -r -g audio -s /sbin/nologin -d /var/run/sndiod sndiod
+make install
