@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+mkdir -p "$1/usr/include"
+cp -R glm/ "$1/usr/include"
