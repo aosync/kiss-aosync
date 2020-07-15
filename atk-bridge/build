@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-sh > /dev/tty
-
-meson --prefix="$1/usr" ..
+meson --prefix="/usr" ..
 
 ninja
-ninja install
+DESTDIR="$1" ninja install

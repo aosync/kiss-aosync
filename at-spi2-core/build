@@ -1,10 +1,8 @@
 #!/bin/sh -e
 
-sh>/dev/tty
-
 meson \
-    --prefix="$1/usr" \
-    --sysconfdir="$1/etc" ..
+    --prefix="/usr" \
+    --sysconfdir="/etc" ..
 
 ninja
-ninja install
+DESTDIR="$1" ninja install

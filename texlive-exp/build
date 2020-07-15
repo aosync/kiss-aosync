@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+./configure \
+	--prefix=/usr \
+	--disable-xdvik \
+	--enable-build-in-source-tree
+
+make
+make DESTDIR="$1" install

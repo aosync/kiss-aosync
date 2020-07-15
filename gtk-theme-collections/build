@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+yes | rm -R .git
+
+mkdir -p "$1/usr/share/themes"
+mv */ "$1/usr/share/themes"

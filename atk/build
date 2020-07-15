@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-meson \
-    --prefix="$1/usr" ..
-
-ninja
-ninja install

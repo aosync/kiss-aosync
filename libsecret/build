@@ -1,8 +1,8 @@
 #!/bin/sh
 
 ./configure \
-    --prefix="$1/usr" \
+    --prefix="/usr" \
     --disable-manpages
 
 make
-make install
+make DESTDIR="$1" install
