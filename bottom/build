@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+cargo install --path . --root "$1/usr"

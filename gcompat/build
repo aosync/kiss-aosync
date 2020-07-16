@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+arch=$(uname --m)
+
+
+make LINKER_PATH="/usr/lib/ld-musl-$arch.so.1" LOADER_NAME="ld-linux-$arch.so.2"
+make DESTDIR="$1/usr" install
