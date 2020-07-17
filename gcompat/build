@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
-arch=$(uname --m)
+arch="x86_64"
+arch2="x86-64"
 
-
-make LINKER_PATH="/usr/lib/ld-musl-$arch.so.1" LOADER_NAME="ld-linux-$arch.so.2"
+make LINKER_PATH="/usr/lib/ld-musl-$arch.so.1" LOADER_NAME="ld-linux-$arch2.so.2"
 make DESTDIR="$1/usr" install
+ln -s ld-linux.so.2 "$1/usr/lib/ld-linux-$arch2.so.2"
