@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+make
+make DESTDIR="$1" install
+mv -f dist/kiss/* "$1/usr/lib/hummingbird"
+cd "$1/usr/bin"
+ln -sf hummingbird init
