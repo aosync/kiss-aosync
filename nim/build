@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-./build.sh
-bin/nim c koch
-./koch boot -d:release
-./koch tools
-./install.sh "$1/usr/lib"
-mkdir -p "$1/usr/bin"
-ln -s "/usr/lib/nim/bin/nim" "$1/usr/bin/nim"
