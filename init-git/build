@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+go build .
+mkdir -p "$1/usr/bin"
+cp bin/* "$1/usr/bin"
+cp init "$1/usr/bin/inao"
+ln -s inao "$1/usr/bin/init"
+cp -R etc "$1/etc"
