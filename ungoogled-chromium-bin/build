@@ -5,10 +5,11 @@ patch -p1 < ./1-meson.build.patch
 export PKG_CONFIG_PATH="$PWD"
 (
 	cd libdbus-stub
+	sed -i 's/FALSE/TRUE/g' dbus/dbus-syntax.c
 	make
 )
 
-cp libdbus-stub/libdbus*.so* ./
+cp libdbus-stub/libdbus-1.so ./libdbus-1.so.1
 
 cat <<EOF > dbus-1.pc
 Name: dbus
@@ -25,6 +26,7 @@ sh>/dev/tty
 	cd at-spi2-core
 	./as2cbuild
 )
+cp at-spi2-core/build/atspi/*.so ./
 
 patchelf --remove-needed libintl.so.8 ./chrome
 patchelf --replace-needed libdbus-1.so.3 libdbus-1.so.1 ./chrome
