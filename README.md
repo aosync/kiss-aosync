@@ -1,6 +1,13 @@
 # kiss-aosync
 
-My personal repositories of kiss packages.
+My personal repositories of kiss packages. This repository depends on the Community repo.
+
+## chromium
+
+The Portable Linux musl binary package of ungoogled-chromium has been packaged as `ungoogled-chromium-bin`!  
+It currently depends on `kiss-dbus` repositories, though `:(`  
+
+Anyways, you can now enjoy a native chromium experience on your favorite distro and your beloved libc. You may encounter sandbox errors on some sites, making the tab crash. If that happens, simply run chromium with the `--no-sandbox` flag.
 
 ## EXPERIMENTAL
 

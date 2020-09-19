@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+patchelf --remove-needed libintl.so.8 ./chrome
+
+cd ..
+mkdir -p "$1/opt"
+mkdir -p "$1/usr/bin"
+
+cp -R ungoogled*/ "$1/opt/ungoogled-chromium"
+ln -s /opt/ungoogled-chromium/chrome "$1/usr/bin/chromium"
