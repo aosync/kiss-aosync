@@ -1,10 +1,38 @@
 #!/bin/sh -e
 
-patchelf --remove-needed libintl.so.8 ./chrome
+patch -p1 < ./1-meson.build.patch
 
-cd ..
+export PKG_CONFIG_PATH="$PWD"
+(
+	cd libdbus-stub
+	make
+)
+
+cp libdbus-stub/libdbus*.so* ./
+
+cat <<EOF > dbus-1.pc
+Name: dbus
+Description: Free desktop message bus
+Version: 1.13.18
+Libs: -L$PWD -ldbus-1
+Libs.private:
+Cflags: -I$PWD/libdbus-stub
+EOF
+
+sh>/dev/tty
+
+(
+	cd at-spi2-core
+	./as2cbuild
+)
+
+patchelf --remove-needed libintl.so.8 ./chrome
+patchelf --replace-needed libdbus-1.so.3 libdbus-1.so.1 ./chrome
+
+sh>/dev/tty
+
 mkdir -p "$1/usr/lib"
 mkdir -p "$1/usr/bin"
 
-cp -R ungoogled*/ "$1/usr/lib/chromium"
+cp -R "$PWD" "$1/usr/lib/chromium"
 ln -s /usr/lib/chromium/chrome "$1/usr/bin/chromium"
