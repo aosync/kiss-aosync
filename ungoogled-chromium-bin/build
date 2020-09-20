@@ -12,6 +12,7 @@ export PKG_CONFIG_PATH="$PWD"
 	make
 )
 cp libdbus-stub/libdbus-1.so ./libdbus-1.so.3
+ln -s libdbus-1.so.3 ./libdbus-1.so
 
 
 # Create PC files to satisfy meson
