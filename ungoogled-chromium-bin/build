@@ -9,7 +9,6 @@ export PKG_CONFIG_PATH="$PWD"
 # Build and install the stub
 (
 	cd libdbus-stub
-	sed -i 's/FALSE/TRUE/g' dbus/dbus-message.c
 	make
 )
 cp libdbus-stub/libdbus-1.so ./libdbus-1.so.3
