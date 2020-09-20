@@ -1,11 +1,8 @@
 alsa-lib
-at-spi2-core
 atk
-atk-bridge
 bzip2
 cairo
 cups
-dbus
 eudev
 expat
 fontconfig
@@ -38,6 +35,7 @@ libxshmfence
 mesa
 nss
 pango
+pciutils
 pixman
 util-linux
 zlib

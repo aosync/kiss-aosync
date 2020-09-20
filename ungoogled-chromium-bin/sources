@@ -1,5 +1,7 @@
 https://github.com/Cubified/ungoogled-chromium-binaries/releases/download/84.0.4147.135-1.musl1/ungoogled-chromium_84.0.4147.135-1.musl1_linux.tar.xz
 git+https://github.com/dylanaraps/libdbus-stub.git libdbus-stub
 http://ftp.gnome.org/pub/gnome/sources/at-spi2-core/2.36/at-spi2-core-2.36.0.tar.xz at-spi2-core
+http://ftp.gnome.org/pub/gnome/sources/at-spi2-atk/2.34/at-spi2-atk-2.34.2.tar.xz atk-bridge
 files/as2cbuild at-spi2-core
 files/1-meson.build.patch
+files/atkbbuild atk-bridge

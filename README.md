@@ -5,9 +5,9 @@ My personal repositories of kiss packages. This repository depends on the Commun
 ## chromium
 
 The Portable Linux musl binary package of ungoogled-chromium has been packaged as `ungoogled-chromium-bin`!  
-It currently depends on `kiss-dbus` repositories, though `:(`  
+And thanks to Dylan's (libdbus-stub)[https://github.com/dylanaraps/libdbus-stub], it is now DBus free!
 
-Anyways, you can now enjoy a native chromium experience on your favorite distro and your beloved libc. You may encounter sandbox errors on some sites, making the tab crash. If that happens, simply run chromium with the `--no-sandbox` flag.
+You can now enjoy a native chromium experience on your favorite distro and your beloved libc. You may encounter sandbox errors on some sites, making the tab crash. If that happens, simply run chromium with the `--no-sandbox` flag. If you are annoyed by the warning that says --no-sandbox is not supported, append the `--test-type` flag to silence that error.
 
 ## EXPERIMENTAL
 
