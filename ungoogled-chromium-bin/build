@@ -19,7 +19,7 @@ cat <<EOF > dbus-1.pc
 Name: dbus
 Description: Free desktop message bus
 Version: 1.13.18
-Libs: -L$PWD -ldbus-1
+Libs: -L$PWD -l:libdbus-1.so.3
 Libs.private:
 Cflags: -I$PWD/libdbus-stub
 EOF
@@ -30,7 +30,7 @@ Description: Accessibility Technology software library
 Version: 2.36.0
 Requires: dbus-1 glib-2.0
 Requires.private: dbus-1 >=  1.5, gobject-2.0 >=  2.0.0, glib-2.0 >=  2.32.0, x11, xtst, xi
-Libs: -L$PWD -latspi
+Libs: -L$PWD -l:libatspi.so.0
 Cflags: -I$PWD/at-spi2-core
 EOF
 
