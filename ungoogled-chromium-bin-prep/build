@@ -1,0 +1,71 @@
+#!/bin/sh -e
+
+# libatspi requires patching to build because alignment check doesn't work automatically
+patch -p1 < ./1-meson.build.patch
+
+# Tell meson to check for .pc files here
+export PKG_CONFIG_PATH="$PWD"
+
+# Build and install the stub
+(
+	cd libdbus-stub
+	make
+)
+cp libdbus-stub/libdbus-1.so ./libdbus-1.so.3
+
+
+# Create PC files to satisfy meson
+cat <<EOF > dbus-1.pc
+Name: dbus
+Description: Free desktop message bus
+Version: 1.13.18
+Libs: -L$PWD -l:libdbus-1.so.3
+Libs.private:
+Cflags: -I$PWD/libdbus-stub
+EOF
+
+cat <<EOF > atspi-2.pc
+Name: atspi
+Description: Accessibility Technology software library
+Version: 2.36.0
+Requires: dbus-1 glib-2.0
+Requires.private: dbus-1 >=  1.5, gobject-2.0 >=  2.0.0, glib-2.0 >=  2.32.0, x11, xtst, xi
+Libs: -L$PWD -l:libatspi.so.0
+Cflags: -I$PWD/at-spi2-core
+EOF
+
+# Build atspi
+(
+	cd at-spi2-core
+	./as2cbuild
+	cp build/atspi/*.h atspi/
+)
+cp at-spi2-core/build/atspi/libatspi.so ./libatspi.so.0
+ln -s libatspi.so.0 ./libatspi.so
+
+# Build atk-bridge
+(
+	cd atk-bridge
+	./atkbbuild
+)
+cp atk-bridge/build/atk-adaptor/libatk-bridge-2.0.so.0.0.0 ./libatk-bridge-2.0.so.0
+
+# libintl is provided by our musl
+patchelf --remove-needed libintl.so.8 ./chrome
+
+# Use shipped .so's
+patchelf --set-rpath '$ORIGIN' ./chrome
+patchelf --set-rpath '$ORIGIN' ./libatspi.so.0
+patchelf --set-rpath '$ORIGIN' ./libatk-bridge-2.0.so.0
+
+# Symlink the system libpci.so.3.x.y to directory due to a bug in the pciutils package (temporary)
+ln -s /usr/lib/libpci.so.3.* ./libpci.so.3
+
+# Clean now useless stuff
+rm -Rf at-spi2-core atk-bridge libdbus-stub 1-meson.build.patch *.pc
+
+mkdir -p "$1/usr/lib"
+mkdir -p "$1/usr/bin"
+
+cp -R "$PWD" "$1/usr/lib/chromium"
+ln -s /usr/lib/chromium/chrome "$1/usr/bin/chromium"

@@ -39,3 +39,4 @@ pciutils
 pixman
 util-linux
 zlib
+patchelf make
